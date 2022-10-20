@@ -38,9 +38,9 @@ public class loginController extends sceneHandler {
         currentUser = super.db.getUser(username.getText().toString(), password.getText().toString());
 
         if(currentUser == null){
-            System.out.println("Wrong username or password.");
-            username.setText("");
-            password.setText("");
+//            username.setText("");
+//            password.setText("");
+            super.triggerAlertMsg("Wrong Login", "Wrong username or password.");
         }
         else{
             System.out.println("Success.");

@@ -1,37 +1,59 @@
 DROP TABLE public.records;
-DROP TABLE public.users;
+DROP TABLE public.Users;
 
 CREATE TABLE IF NOT EXISTS public.users
 (
-    "userID" integer NOT NULL DEFAULT nextval('"users_userID_seq"'::regclass),
-    "userName" character varying COLLATE pg_catalog."default" NOT NULL,
-    "passwordHash" character varying COLLATE pg_catalog."default" NOT NULL,
-    "firstName" character varying COLLATE pg_catalog."default" NOT NULL,
-    "secondName" character varying COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT users_pkey PRIMARY KEY ("userID")
-)
-
-TABLESPACE pg_default;
+    "userID" serial NOT NULL,
+    "userName" character varying NOT NULL,
+    "passwordHash" character varying NOT NULL,
+    "firstName" character varying NOT NULL,
+    "secondName" character varying NOT NULL,
+    PRIMARY KEY ("userID")
+);
 
 ALTER TABLE IF EXISTS public.users
     OWNER to postgres;
 
 CREATE TABLE IF NOT EXISTS public.records
 (
-    "recordID" integer NOT NULL DEFAULT nextval('"records_recordID_seq"'::regclass),
+    "recordID" serial NOT NULL,
     weight integer NOT NULL,
     temperature integer NOT NULL,
     "bloodPressure" integer NOT NULL,
-    "Note" character varying COLLATE pg_catalog."default" NOT NULL,
+    "Note" character varying NOT NULL,
     "userID" integer NOT NULL,
-    CONSTRAINT records_pkey PRIMARY KEY ("recordID"),
+    PRIMARY KEY ("recordID"),
     CONSTRAINT "userID-userID" FOREIGN KEY ("userID")
         REFERENCES public.users ("userID") MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-)
-
-TABLESPACE pg_default;
+        NOT VALID
+);
 
 ALTER TABLE IF EXISTS public.records
     OWNER to postgres;
+
+insert into users ("userName", "passwordHash", "firstName", "secondName")
+values ('pranav125', 'pranav125', 'Pranav', 'Barve');
+
+insert into users ("userName", "passwordHash", "firstName", "secondName")
+values ('rohit121', 'rohit121', 'Rohit', 'Awate');
+
+insert into users ("userName", "passwordHash", "firstName", "secondName")
+values ('stuti0806', 'stuti0806', 'Stuti', 'Biyani');
+
+insert into users ("userName", "passwordHash", "firstName", "secondName")
+values ('divyank23', 'divyank23', 'Divyank', 'Agarwal');
+
+
+insert into records ("weight", "temperature", "bloodPressure", "Note", "userID")
+values (70,35,130,'Pranav is a god', 2);
+
+insert into records ("weight", "temperature", "bloodPressure", "Note", "userID")
+values (73.5,35,100,'Pranav is a god', 4);
+
+insert into records ("weight", "temperature", "bloodPressure", "Note", "userID")
+values (75,35.56,130.89,'Pranav is a god', 3);
+
+insert into records ("weight", "temperature", "bloodPressure", "Note", "userID")
+values (79,35,121.5,'Pranav is a god', 4);

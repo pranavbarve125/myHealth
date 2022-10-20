@@ -53,28 +53,29 @@ public class databaseConnector {
     boolean insertUser(User userToBeEntered){
         try {
             String userDetails = String.format("INSERT INTO public.users(\"userName\", \"passwordHash\", \"firstName\", \"secondName\") VALUES (\'%s\', \'%s\', \'%s\', \'%s\');", userToBeEntered.getUsername(), userToBeEntered.getPasswordHash(), userToBeEntered.getFirstName(), userToBeEntered.getLastName());
-            System.out.println(userDetails);
+//            System.out.println(userDetails);
             stmnt.executeUpdate(userDetails);
             conn.commit();
             return true;
         }catch(SQLException e){
+            //unique constraint is exploited
             System.out.println(e);
             return false;
         }
     }
 
-    boolean updateUserDetails(User userToBeUpdated){
-        try {
-            String userDetails = String.format("INSERT INTO public.users(\"userName\", \"passwordHash\", \"firstName\", \"secondName\") VALUES (\'%s\', \'%s\', \'%s\', \'%s\');", userToBeEntered.getUsername(), userToBeEntered.getPasswordHash(), userToBeEntered.getFirstName(), userToBeEntered.getLastName());
-            System.out.println(userDetails);
-            stmnt.executeUpdate(userDetails);
-            conn.commit();
-            return true;
-        }catch(SQLException e){
-            System.out.println(e);
-            return false;
-        }
-    }
+//    boolean updateUserDetails(User userToBeUpdated){
+//        try {
+//            String userDetails = String.format("INSERT INTO public.users(\"userName\", \"passwordHash\", \"firstName\", \"secondName\") VALUES (\'%s\', \'%s\', \'%s\', \'%s\');", userToBeEntered.getUsername(), userToBeEntered.getPasswordHash(), userToBeEntered.getFirstName(), userToBeEntered.getLastName());
+//            System.out.println(userDetails);
+//            stmnt.executeUpdate(userDetails);
+//            conn.commit();
+//            return true;
+//        }catch(SQLException e){
+//            System.out.println(e);
+//            return false;
+//        }
+//    }
 
 
 

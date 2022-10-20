@@ -2,10 +2,7 @@ package myhealth.myhealth;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import  java.security.*;
 
@@ -42,12 +39,19 @@ public class signUpController extends sceneHandler {
 
             // hashing the password
 
-            boolean flag = super.db.insertUser(new User(username.getText().toString(), password.getText().toString(), firstname.getText().toString(), secondname.getText().toString()));
+            User currentUser = new User(username.getText().toString(), password.getText().toString(), firstname.getText().toString(), secondname.getText().toString());
+            boolean flag = super.db.insertUser(currentUser);
             if(flag == true){
+
+                // store the current username
+                super.setUser(currentUser);
+
                 super.sceneSwitcher(event, "SuccessfulSignIn.fxml");
             }
             else{
-                messageAlert.setText("Error. Enter again.");
+                //switch to login screen with a message.
+                super.triggerAlertMsg("Username already present.", "Username is already present. Login instead.");
+                super.sceneSwitcher(event, "login.fxml");
             }
         }
     }
