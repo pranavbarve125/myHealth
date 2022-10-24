@@ -1,5 +1,7 @@
-package myhealth.myhealth;
+package myhealth.Control;
 
+import Model.Record;
+import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -32,28 +34,29 @@ public class signUpController extends sceneHandler {
     public void userSignUp(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException, NoSuchProviderException{
         //currentUser = db.getUser(username.getText().toString(), password.getText().toString());
         if (firstname.getText().isEmpty() || secondname.getText().isEmpty() || password.getText().isEmpty() || username.getText().isEmpty()){
-            messageAlert.setText("Enter information in all boxes.");
+            super.triggerAlertMsg("Empty Fields", "Enter information in all boxes.");
         }
         else{
-            // insert in the database.
-
             // hashing the password
 
+            // insert in the database.
             User currentUser = new User(username.getText().toString(), password.getText().toString(), firstname.getText().toString(), secondname.getText().toString());
             boolean flag = super.db.insertUser(currentUser);
             if(flag == true){
 
-                // store the current username
+                currentUser.setUserID(super.db.getUserID());
                 super.setUser(currentUser);
-
-                super.sceneSwitcher(event, "SuccessfulSignIn.fxml");
+                super.sceneSwitcher(event, "records.fxml");
             }
             else{
-                //switch to login screen with a message.
-                super.triggerAlertMsg("Username already present.", "Username is already present. Login instead.");
-                super.sceneSwitcher(event, "login.fxml");
+                //switch to login screen with a message
+                super.triggerAlertMsg("Username already present.", "Username is already present. Use a different username.");
             }
         }
+    }
+
+    public void logIn(ActionEvent event) throws IOException{
+        super.sceneSwitcher(event, "login.fxml");
     }
 
 }

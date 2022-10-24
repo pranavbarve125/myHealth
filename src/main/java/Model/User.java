@@ -1,4 +1,4 @@
-package myhealth.myhealth;
+package Model;
 
 public class User {
     String username, passwordHash, firstName, lastName;
@@ -11,6 +11,13 @@ public class User {
         this.passwordHash = passwordHash;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public User(int userID, String username, String firstName, String lastName) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userID = userID;
     }
 
     public String getUsername() {

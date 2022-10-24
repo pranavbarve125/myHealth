@@ -1,5 +1,7 @@
-package myhealth.myhealth;
+package myhealth.Control;
 
+import Model.Record;
+import Model.User;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -34,19 +36,25 @@ public class loginController extends sceneHandler {
     @FXML // fx:id="username"
     private TextField username; // Value injected by FXMLLoader
 
-    public void userLogIn(ActionEvent event) throws IOException, SQLException {
-        currentUser = super.db.getUser(username.getText().toString(), password.getText().toString());
+    public void userLogIn(ActionEvent event) {
+        try {
+            currentUser = super.db.getUser(username.getText().toString(), password.getText().toString());
+            System.out.println("This is the current user : " + currentUser);
 
-        if(currentUser == null){
+            if (currentUser == null) {
 //            username.setText("");
 //            password.setText("");
-            super.triggerAlertMsg("Wrong Login", "Wrong username or password.");
+                super.triggerAlertMsg("Wrong Login", "Wrong username or password.");
+            } else {
+                System.out.println("Success.");
+                username.setText("");
+                password.setText("");
+                super.setUser(currentUser);
+                super.sceneSwitcher(event, "records.fxml");
+            }
         }
-        else{
-            System.out.println("Success.");
-            username.setText("");
-            password.setText("");
-            super.sceneSwitcher(event, "Successful.fxml");
+        catch(Exception e){
+            e.printStackTrace();
         }
     }
 

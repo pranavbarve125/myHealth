@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myhealth.myhealth.signUpController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myhealth.Control.signUpController">
     <left>
         <AnchorPane prefHeight="462.0" prefWidth="263.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER" />
     </left>
@@ -32,7 +32,7 @@
                         <Font name="System Bold" size="30.0" />
                     </font>
                 </Label>
-                <Button fx:id="signupbutton" layoutX="167.0" layoutY="348.0" mnemonicParsing="false" onAction="#userSignUp" text="Sign Up">
+                <Button fx:id="signupbutton" layoutX="169.0" layoutY="331.0" mnemonicParsing="false" onAction="#userSignUp" text="Sign Up">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -54,6 +54,11 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+            <Button fx:id="loginbutton" layoutX="174.0" layoutY="399.0" mnemonicParsing="false" onAction="#logIn" text="Log In">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
     </center>

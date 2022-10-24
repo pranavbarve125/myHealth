@@ -1,5 +1,7 @@
-package myhealth.myhealth;
+package myhealth.Control;
 
+import Model.Record;
+import Model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,11 +10,12 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class myHealth extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
         Scene login = new Scene(root);
         stage.setScene(login);
         stage.show();

@@ -7,6 +7,6 @@ module myhealth.myhealth {
     requires java.sql;
     requires org.postgresql.jdbc;
 
-    opens myhealth.myhealth to javafx.fxml;
-    exports myhealth.myhealth;
+    opens myhealth.Control to javafx.fxml;
+    exports myhealth.Control;
 }
