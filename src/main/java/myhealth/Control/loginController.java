@@ -1,6 +1,5 @@
 package myhealth.Control;
 
-import Model.Record;
 import Model.User;
 import java.io.IOException;
 import java.net.URL;
@@ -38,13 +37,12 @@ public class loginController extends sceneHandler {
 
     public void userLogIn(ActionEvent event) {
         try {
-            currentUser = super.db.getUser(username.getText().toString(), password.getText().toString());
-            System.out.println("This is the current user : " + currentUser);
+            currentUser = super.db.getUser(username.getText().toString(), super.hashPassword(password.getText().toString())); //hashing password before fetching the user
 
             if (currentUser == null) {
 //            username.setText("");
 //            password.setText("");
-                super.triggerAlertMsg("Wrong Login", "Wrong username or password.");
+                super.ErrorAlertMsg("Wrong Login", "Wrong username or password.");
             } else {
                 System.out.println("Success.");
                 username.setText("");

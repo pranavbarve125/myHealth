@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="singleRecord" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="94.0" prefWidth="357.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myhealth.Control.singleRecordsPaneController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" />
+      <Label fx:id="recordlabel" prefHeight="93.0" prefWidth="309.0" text="No Records to show!" textAlignment="CENTER">
+         <padding>
+            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+         </padding>
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Pane prefHeight="200.0" prefWidth="200.0" />
+   </children>
+</HBox>

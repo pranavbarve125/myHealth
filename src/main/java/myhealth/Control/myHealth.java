@@ -18,6 +18,7 @@ public class myHealth extends Application {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
         Scene login = new Scene(root);
         stage.setScene(login);
+        stage.setTitle("My Health App");
         stage.show();
     }
 

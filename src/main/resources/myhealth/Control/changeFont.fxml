@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myhealth.Control.editRecordController">
+    <left>
+        <AnchorPane prefHeight="462.0" prefWidth="263.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER" />
+    </left>
+   <right>
+        <AnchorPane prefHeight="462.0" prefWidth="489.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="usernameDisplay" layoutX="1.0" layoutY="21.0" prefHeight="35.0" prefWidth="424.0" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="backButton" layoutX="181.0" layoutY="369.0" mnemonicParsing="false" text="Back">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <HBox layoutX="133.0" layoutY="136.0" prefHeight="20.0" prefWidth="160.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="12" />
+                  <Pane prefHeight="20.0" prefWidth="16.0" />
+                  <RadioButton mnemonicParsing="false" text="14" />
+                  <Pane prefHeight="20.0" prefWidth="16.0" />
+                  <RadioButton mnemonicParsing="false" text="16" />
+               </children>
+            </HBox>
+            <HBox layoutX="61.0" layoutY="231.0" prefHeight="20.0" prefWidth="303.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" text="Comic Sans" />
+                  <Pane prefHeight="20.0" prefWidth="16.0" />
+                  <RadioButton mnemonicParsing="false" text="Arial" />
+                  <Pane prefHeight="20.0" prefWidth="16.0" />
+                  <RadioButton mnemonicParsing="false" text="Times New Roman" />
+               </children>
+            </HBox>
+         </children>
+        </AnchorPane>
+   </right>
+</BorderPane>

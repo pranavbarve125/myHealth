@@ -20,11 +20,13 @@ public class singleRecordsPaneController {
     @FXML
     private HBox singleRecord;
 
-    public void setup(int id, String text, EventHandler onDelete, EventHandler onEdit){
+    public void setup(int id, String text, EventHandler onDelete, EventHandler onEdit, EventHandler onView){
         deletebutton.setId(Integer.toString(id));
         editbutton.setId(Integer.toString(id));
+        recordlabel.setId(Integer.toString(id));
         recordlabel.setText(text);
         deletebutton.setOnMouseClicked(onDelete);
         editbutton.setOnMouseClicked(onEdit);
+        recordlabel.setOnMouseClicked(onView);
     }
 }

@@ -10,7 +10,10 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myhealth.Control.recordsController">
    <left>
-      <AnchorPane prefHeight="462.0" prefWidth="263.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="462.0" prefWidth="263.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="customizeFont" layoutX="70.0" layoutY="416.0" mnemonicParsing="false" text="Customize Font" />
+         </children></AnchorPane>
    </left>
    <center>
       <AnchorPane prefHeight="462.0" prefWidth="489.0" BorderPane.alignment="CENTER">
@@ -25,12 +28,22 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="createButton" layoutX="23.0" layoutY="361.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="138.0" text="Create Record">
+            <Button fx:id="createButton" layoutX="23.0" layoutY="361.0" mnemonicParsing="false" onAction="#createRecord" prefHeight="40.0" prefWidth="138.0" text="Create Record">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="logoutButton" layoutX="312.0" layoutY="361.0" mnemonicParsing="false" text="Log Out">
+            <Button fx:id="logoutButton" layoutX="312.0" layoutY="361.0" mnemonicParsing="false" onAction="#logOut" text="Log Out">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="editProfile" layoutX="183.0" layoutY="361.0" mnemonicParsing="false" onAction="#editProfile" text="Edit Profile">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="saveButton" layoutX="120.0" layoutY="408.0" mnemonicParsing="false" text="Save Records to File">
                <font>
                   <Font size="18.0" />
                </font>

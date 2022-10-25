@@ -75,6 +75,33 @@ public class databaseConnector extends sceneHandler{
         return null;
     }
 
+    boolean insertUser(User userToBeEntered) throws SQLException{
+        try {
+            String userDetails = String.format("INSERT INTO public.users(\"userName\", \"passwordHash\", \"firstName\", \"secondName\") VALUES (\'%s\', \'%s\', \'%s\', \'%s\');", userToBeEntered.getUsername(), userToBeEntered.getPasswordHash(), userToBeEntered.getFirstName(), userToBeEntered.getLastName());
+            System.out.println(userDetails);
+            stmnt.executeUpdate(userDetails);
+            conn.commit();
+            return true;
+        }catch(SQLException e){
+            //unique constraint is exploited
+            conn.rollback(); //rolling back the changes
+            return false;
+        }
+    }
+
+    public boolean updateUser(String firstName, String lastName) {
+        try {
+            String recordQuery = String.format("UPDATE PUBLIC.users SET \"firstName\" = \'%s\', \"secondName\" = \'%s\' WHERE \"userID\" = %d;", firstName, lastName, super.getUser().getUserID());
+            stmnt.executeUpdate(recordQuery);
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            //unique constraint is exploited
+            System.out.println(e);
+            return false;
+        }
+    }
+
     public ArrayList<Record> getRecords() throws SQLException{
         String recordQuery = String.format("SELECT * from public.records where \"userID\" = (select \"userID\" from public.users where \"userName\"=\'%s\');", super.getUsername());
         ResultSet rs = null;
@@ -132,21 +159,15 @@ public class databaseConnector extends sceneHandler{
         return null;
     }
 
-    public boolean updateRecord() throws SQLException{
-        //UPDATE public.records SET "weight" = 12, "temperature" = 12, "bloodPressure" = 34, "Note" = 'Hey there' WHERE "recordID" = 4;
-        return false;
-    }
-
-    boolean insertUser(User userToBeEntered){
+    public boolean updateRecord(int recordID, Record toUpdate) {
         try {
-            String userDetails = String.format("INSERT INTO public.users(\"userName\", \"passwordHash\", \"firstName\", \"secondName\") VALUES (\'%s\', \'%s\', \'%s\', \'%s\');", userToBeEntered.getUsername(), userToBeEntered.getPasswordHash(), userToBeEntered.getFirstName(), userToBeEntered.getLastName());
-            System.out.println(userDetails);
-            stmnt.executeUpdate(userDetails);
+            String recordQuery = String.format("UPDATE public.records SET \"weight\" = %d, \"temperature\" = %d, \"bloodPressure\" = %d, \"Note\" = \'%s\' WHERE \"recordID\" = %d", toUpdate.getWeight(), toUpdate.getTemperature(), toUpdate.getBloodPressure(), toUpdate.getNote(), recordID);
+            stmnt.executeUpdate(recordQuery);
             conn.commit();
             return true;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             //unique constraint is exploited
-            //System.out.println(e);
+            System.out.println(e);
             return false;
         }
     }

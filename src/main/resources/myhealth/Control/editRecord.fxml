@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myhealth.Control.editRecordController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myhealth.Control.editRecordController">
     <left>
         <AnchorPane prefHeight="462.0" prefWidth="263.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER" />
     </left>
@@ -22,7 +22,7 @@
             <TextField fx:id="weight" layoutX="168.0" layoutY="109.0" />
             <TextField fx:id="temperature" layoutX="168.0" layoutY="154.0" />
             <TextField fx:id="bp" layoutX="168.0" layoutY="197.0" />
-            <Button fx:id="createButton" layoutX="225.0" layoutY="372.0" mnemonicParsing="false" text="Create Record">
+            <Button fx:id="createButton" layoutX="225.0" layoutY="372.0" mnemonicParsing="false" onAction="#createOrEditRecord" text="Create Record">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Button>
@@ -32,7 +32,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="backButton" layoutX="14.0" layoutY="372.0" mnemonicParsing="false" text="Back">
+            <Button fx:id="backButton" layoutX="14.0" layoutY="372.0" mnemonicParsing="false" onAction="#back" text="Back">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

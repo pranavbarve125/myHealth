@@ -1,14 +1,15 @@
 package myhealth.Control;
 
-import Model.Record;
 import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import  java.security.*;
+import java.math.BigInteger;
+import  java.security.MessageDigest;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class signUpController extends sceneHandler {
@@ -31,26 +32,27 @@ public class signUpController extends sceneHandler {
     @FXML
     private Label messageAlert;
 
-    public void userSignUp(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException, NoSuchProviderException{
-        //currentUser = db.getUser(username.getText().toString(), password.getText().toString());
+    public void userSignUp(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException {
+        String hashedUserPassword;
         if (firstname.getText().isEmpty() || secondname.getText().isEmpty() || password.getText().isEmpty() || username.getText().isEmpty()){
-            super.triggerAlertMsg("Empty Fields", "Enter information in all boxes.");
+            super.ErrorAlertMsg("Empty Fields", "Enter information in all boxes.");
         }
         else{
             // hashing the password
+            hashedUserPassword = super.hashPassword(password.getText());
 
             // insert in the database.
-            User currentUser = new User(username.getText().toString(), password.getText().toString(), firstname.getText().toString(), secondname.getText().toString());
+            User currentUser = new User(username.getText().toString(), hashedUserPassword, firstname.getText().toString(), secondname.getText().toString());
             boolean flag = super.db.insertUser(currentUser);
             if(flag == true){
 
-                currentUser.setUserID(super.db.getUserID());
                 super.setUser(currentUser);
+                currentUser.setUserID(super.db.getUserID());
                 super.sceneSwitcher(event, "records.fxml");
             }
             else{
                 //switch to login screen with a message
-                super.triggerAlertMsg("Username already present.", "Username is already present. Use a different username.");
+                super.ErrorAlertMsg("Username already present.", "Username is already present. Use a different username.");
             }
         }
     }

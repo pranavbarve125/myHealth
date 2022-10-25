@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="singleRecord" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="94.0" prefWidth="300.0" style="-fx-border-color: #000000;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myhealth.Control.singleRecordsPaneController">
+<HBox fx:id="singleRecord" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="94.0" prefWidth="370.0" style="-fx-border-color: #000000;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myhealth.Control.singleRecordsPaneController">
    <children>
       <Pane prefHeight="93.0" prefWidth="22.0" />
-      <Label fx:id="recordlabel" prefHeight="93.0" prefWidth="203.0">
+      <Label fx:id="recordlabel" prefHeight="93.0" prefWidth="233.0">
          <padding>
             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
          </padding>
