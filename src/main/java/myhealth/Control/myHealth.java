@@ -12,10 +12,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class myHealth extends Application {
+public class myHealth extends Application{
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
+        root.setStyle(sceneHandler.styleString);
         Scene login = new Scene(root);
         stage.setScene(login);
         stage.setTitle("My Health App");

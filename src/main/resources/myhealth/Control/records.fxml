@@ -43,7 +43,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="saveButton" layoutX="120.0" layoutY="408.0" mnemonicParsing="false" text="Save Records to File">
+            <Button fx:id="saveButton" layoutX="120.0" layoutY="408.0" mnemonicParsing="false" onAction="#saveRecordsToFile" text="Save Records to File">
                <font>
                   <Font size="18.0" />
                </font>

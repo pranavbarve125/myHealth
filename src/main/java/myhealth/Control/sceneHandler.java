@@ -24,6 +24,7 @@ public class sceneHandler {
     private static User currentUsername;
     private static Record currentRecord;
     private static boolean createFlag = true;
+    static String styleString;
 
     protected static databaseConnector db = new databaseConnector();
 
@@ -87,7 +88,7 @@ public class sceneHandler {
 
     void switchToSingleRecord(MouseEvent event, String filename) throws IOException {
 
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(filename)));
+        Parent root = FXMLLoader.load(getClass().getResource(filename));
         primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryScene = new Scene(root);
         primaryStage.setScene(primaryScene);

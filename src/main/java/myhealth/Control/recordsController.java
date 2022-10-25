@@ -32,7 +32,10 @@ public class recordsController extends sceneHandler implements Initializable{
     private Button deleteB;
 
     @FXML
-    private Button editB, saveButton;
+    private Button editB;
+
+    @FXML
+    private Button saveButton;
 
     @FXML
     private ScrollPane scrollBox;
@@ -44,14 +47,13 @@ public class recordsController extends sceneHandler implements Initializable{
     private Label usernameDisplay;
 
     private ArrayList<Record> records;
-    private String recordText;
-//    private FileChooser fileSaver;
-//    private File fileToSave;
-//    private FileWriter wr;
+    private singleRecordsPaneController singleRecordObject;
+    String recordText;
+    private FileChooser fileSaver;
+    private File fileToSave;
+    private FileWriter wr;
 
     private void updateScene(){
-        singleRecordsPaneController singleRecordObject;
-        recordsPane.getChildren().clear();
         try{
             records = db.getRecords();
         }
@@ -59,20 +61,15 @@ public class recordsController extends sceneHandler implements Initializable{
             e.printStackTrace();
         }
         try {
-            FXMLLoader fxmlLoadObject = new FXMLLoader();
-            if (records.isEmpty()) {
-                fxmlLoadObject.setLocation(getClass().getResource("emptyHBox.fxml"));
-                recordsPane.getChildren().add(fxmlLoadObject.load());
-            } else {
-                for (int n = 0; n < records.size(); n++) {
-                    fxmlLoadObject.setLocation(getClass().getResource("singleRecordHbox.fxml"));
-                    HBox singleRecord = null;
-                    singleRecord = fxmlLoadObject.load();
-                    singleRecordObject = fxmlLoadObject.getController();
-                    recordText = String.format("Weight : %d\nTemperature : %d\nBlood Pressure : %d\nNote : %s", records.get(n).getWeight(), records.get(n).getTemperature(), records.get(n).getBloodPressure(), records.get(n).getNote());
-                    singleRecordObject.setup(records.get(n).getRecordID(), recordText, onDelete, onEdit, onView);
-                    recordsPane.getChildren().add(singleRecord);
-                }
+            recordsPane.getChildren().clear();
+            for(int n=0; n<records.size(); n++){
+                FXMLLoader fxmlLoadObject = new FXMLLoader();
+                fxmlLoadObject.setLocation(getClass().getResource("singleRecordHbox.fxml"));
+                HBox singleRecord = fxmlLoadObject.load();
+                singleRecordObject = fxmlLoadObject.getController();
+                recordText = String.format("Weight : %d\nTemperature : %d\nBlood Pressure : %d\nNote : %s", records.get(n).getWeight(), records.get(n).getTemperature(), records.get(n).getBloodPressure(), records.get(n).getNote());
+                singleRecordObject.setup(records.get(n).getRecordID(), recordText, onDelete, onEdit, onView);
+                recordsPane.getChildren().add(singleRecord);
             }
         }
         catch(IOException e){
@@ -82,10 +79,7 @@ public class recordsController extends sceneHandler implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //initializing file variable to null
-//        fileToSave = null;
-
-        usernameDisplay.setText("Welcome " + super.getUser().getFirstName() + " " + super.getUser().getLastName() + "!");
+        usernameDisplay.setText("Welcome " + super.getUser().getFirstName() + "!");
         usernameDisplay.setAlignment(Pos.CENTER);
         updateScene();
     }
@@ -94,6 +88,14 @@ public class recordsController extends sceneHandler implements Initializable{
         try {
             super.setCreateFlag(true);
             super.sceneSwitcher(event, "editRecord.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editProfile(ActionEvent event){
+        try {
+            super.sceneSwitcher(event, "editProfile.fxml");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,14 +110,6 @@ public class recordsController extends sceneHandler implements Initializable{
         }
     }
 
-    public void editProfile(ActionEvent event){
-        try {
-            super.sceneSwitcher(event, "editProfile.fxml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public String getRecordString(Record toSave) {
         return "Record ID : " + toSave.getRecordID() +
                 "\nWeight : " + toSave.getWeight() +
@@ -124,24 +118,24 @@ public class recordsController extends sceneHandler implements Initializable{
                 "\nNote : " + toSave.getNote() + "\n\n\n";
     }
 
-//    public void saveRecordsToFile(ActionEvent event) throws IOException {
-//        fileSaver = new FileChooser();
-//        fileSaver.setTitle("Save Records.");
-//        fileSaver.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"));
-//        fileToSave = fileSaver.showSaveDialog(((Node) event.getTarget()).getScene().getWindow()); //passing the current window
-//
-//        if (fileToSave != null) {
-//            wr = new FileWriter(fileToSave);
-//            records.forEach((r) -> {
-//                try {
-//                    wr.write(getRecordString(r));
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            });
-//            wr.close();
-//        }
-//    }
+    public void saveRecordsToFile(ActionEvent event) throws IOException {
+        fileSaver = new FileChooser();
+        fileSaver.setTitle("Save Records.");
+        fileSaver.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"));
+        fileToSave = fileSaver.showSaveDialog(((Node) event.getTarget()).getScene().getWindow()); //passing the current window
+
+        if (fileToSave != null) {
+            wr = new FileWriter(fileToSave);
+            records.forEach((r) -> {
+                try {
+                    wr.write(getRecordString(r));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            wr.close();
+        }
+    }
 
     EventHandler onDelete = new EventHandler() {
         @Override
@@ -149,11 +143,11 @@ public class recordsController extends sceneHandler implements Initializable{
             int recordID = Integer.parseInt(((Node)event.getSource()).getId());
             boolean flag = db.deleteRecord(recordID);
             if (flag){
-                recordsController.super.confirmationAlertMsg("Successful.", "Record is deleted.");
+                recordsController.super.ErrorAlertMsg("Successful.", "Record is deleted.");
                 updateScene();
             }
             else{
-                recordsController.super.confirmationAlertMsg("Unsuccessful.", "Record could not be deleted.");
+                recordsController.super.ErrorAlertMsg("Unsuccessful.", "Record could not be deleted.");
             }
         }
     };
